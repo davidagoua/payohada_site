@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayOhada - Paie et RH Automatisées en Zone OHADA</title>
+  <meta name="description" content="PayOhada simplifie et automatise la gestion de la paie et des ressources humaines en conformité totale avec les réglementations CNPS et fiscales de la zone OHADA.">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Configuration Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#20973d',
+              50: '#f0faf2',
+              100: '#dbf4df',
+              200: '#b9e8c3',
+              300: '#87d698',
+              400: '#4ebb65',
+              500: '#20973d',
+              600: '#177b2f',
+              700: '#146228',
+              800: '#134e23',
+              900: '#114120',
+              950: '#06240f',
+            },
+            darkBg: '#090d16',
+            cardBg: '#111827',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
+
+  <!-- ================= NAV BAR ================= -->
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-panel border-b border-slate-200/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <a href="#" class="flex items-center space-x-2">
+            <div class="h-10 w-10 bg-primary rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-primary/20">
+              P
+            </div>
+            <span class="text-2xl font-bold tracking-tight text-slate-900">Pay<span class="text-primary">Ohada</span></span>
+          </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#features" class="text-slate-600 hover:text-primary font-medium transition-colors">Fonctionnalités</a>
+          <a href="#simulator" class="text-slate-600 hover:text-primary font-medium transition-colors">Simulateur de Paie</a>
+          <a href="#pricing" class="text-slate-600 hover:text-primary font-medium transition-colors">Tarifs</a>
+          <a href="#faq" class="text-slate-600 hover:text-primary font-medium transition-colors">FAQ</a>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hidden md:flex items-center space-x-4">
+          <a href="#" class="text-slate-700 hover:text-primary font-medium transition-colors" onclick="openDemoModal(event, 'connexion')">Connexion</a>
+          <a href="#" class="shimmer-btn bg-primary hover:bg-primary-600 text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg shadow-primary/20 transition-all duration-300 flex items-center space-x-1" onclick="openDemoModal(event, 'navbar-cta')">
+            <span>Demander une démo</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-slate-700 hover:text-primary focus:outline-none" aria-label="Menu principal">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path id="menu-icon-hamburger" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu panel -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200/50 bg-white/95 backdrop-blur-md px-4 pt-2 pb-6 space-y-3 shadow-lg">
+      <a href="#features" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">Fonctionnalités</a>
+      <a href="#simulator" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">Simulateur de Paie</a>
+      <a href="#pricing" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">Tarifs</a>
+      <a href="#faq" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">FAQ</a>
+      <hr class="border-slate-200/50 my-2">
+      <a href="#" class="block px-3 py-2.5 text-center text-slate-700 hover:text-primary font-medium transition-colors" onclick="openDemoModal(event, 'connexion-mob')">Connexion</a>
+      <a href="#" class="block w-full text-center bg-primary hover:bg-primary-600 text-white font-semibold px-4 py-3 rounded-xl shadow-lg transition-colors" onclick="openDemoModal(event, 'navbar-cta-mob')">
+        Demander une démo
+      </a>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative pt-32 pb-24 lg:pt-40 lg:pb-36 bg-gradient-to-br from-primary-50/50 via-white to-slate-50 overflow-hidden">
+    
+    <!-- Background patterns -->
+    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary-200 filter blur-3xl"></div>
+      <div class="absolute top-1/2 -left-40 w-80 h-80 rounded-full bg-emerald-100 filter blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Text content -->
+        <div class="lg:col-span-6 text-center lg:text-left space-y-6">
+          <div class="inline-flex items-center space-x-2 bg-primary-100/80 border border-primary-200 text-primary-800 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide shadow-sm">
+            <span class="flex h-2 w-2 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span>100% Conforme Zone OHADA (CNPS, IGR, ITS, VPS)</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            Gérez la paie & les RH <br class="hidden sm:inline">
+            en toute <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-600">sérénité</span>
+          </h1>
+          
+          <p class="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
+            L'unique logiciel de paie moderne conçu spécifiquement pour l'Afrique de l'Ouest et Centrale. Automatisez vos bulletins de salaire, déclarez vos cotisations sociales en un clic et digitalisez le quotidien de vos salariés.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <a href="#" class="shimmer-btn w-full sm:w-auto bg-primary hover:bg-primary-600 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-primary/20 text-center transition-all duration-300" onclick="openDemoModal(event, 'hero-primary')">
+              Essai Gratuit 14 Jours
+            </a>
+            <a href="#simulator" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 font-semibold px-8 py-4 rounded-2xl border border-slate-200 text-center transition-colors shadow-sm flex items-center justify-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+              <span>Calculateur de Paie</span>
+            </a>
+          </div>
+
+          <!-- Feature tags -->
+          <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/60 max-w-md mx-auto lg:mx-0">
+            <div>
+              <div class="text-2xl font-bold text-slate-900">99.8%</div>
+              <div class="text-xs text-slate-500 font-medium">De Paies Exactes</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-slate-900">4x</div>
+              <div class="text-xs text-slate-500 font-medium">Gain de Temps</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-slate-900">17</div>
+              <div class="text-xs text-slate-500 font-medium">Pays OHADA Supportés</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive app mockup preview -->
+        <div class="lg:col-span-6 animate-float relative">
+          <!-- Main Card mockup -->
+          <div class="bg-white rounded-3xl shadow-2xl shadow-slate-200 border border-slate-200/50 p-6 md:p-8 max-w-lg mx-auto relative z-10">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+              <div class="flex items-center space-x-3">
+                <div class="h-3 w-3 rounded-full bg-rose-400"></div>
+                <div class="h-3 w-3 rounded-full bg-amber-400"></div>
+                <div class="h-3 w-3 rounded-full bg-emerald-400"></div>
+                <span class="text-xs font-semibold text-slate-400 pl-2">Dashboard RH / Côte d'Ivoire</span>
+              </div>
+              <span class="bg-primary-100 text-primary-800 text-[10px] font-bold uppercase px-2 py-0.5 rounded-full">Session Active</span>
+            </div>
+
+            <!-- Stats grid inside mockup -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-xs text-slate-400 font-semibold block mb-1">Masse Salariale</span>
+                <span class="text-lg font-bold text-slate-800">14.850.000 <span class="text-[10px] text-slate-400 font-normal">FCFA</span></span>
+                <span class="text-[10px] text-emerald-600 font-medium block mt-1 flex items-center space-x-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                  <span>Mois en cours</span>
+                </span>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-xs text-slate-400 font-semibold block mb-1">Collaborateurs</span>
+                <span class="text-lg font-bold text-slate-800">42 actifs</span>
+                <span class="text-[10px] text-slate-400 font-medium block mt-1">2 arrivées cette semaine</span>
+              </div>
+            </div>
+
+            <!-- Process preview interactive mockup -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Avancement de la paie - Août 2026</h4>
+                <span class="text-xs font-semibold text-primary">85% Complété</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2">
+                <div class="bg-primary h-2 rounded-full transition-all duration-1000" style="width: 85%"></div>
+              </div>
+              
+              <!-- Micro task list inside mockup -->
+              <div class="space-y-2 pt-2">
+                <div class="flex items-center justify-between text-xs p-2.5 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-100">
+                  <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span class="font-medium">Variables de paie collectées</span>
+                  </div>
+                  <span class="text-[10px] font-bold bg-emerald-200 text-emerald-900 px-1.5 py-0.5 rounded">Valide</span>
+                </div>
+                <div class="flex items-center justify-between text-xs p-2.5 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-100">
+                  <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span class="font-medium">Calcul des cotisations (CNPS/Fisc)</span>
+                  </div>
+                  <span class="text-[10px] font-bold bg-emerald-200 text-emerald-900 px-1.5 py-0.5 rounded">Valide</span>
+                </div>
+                <div class="flex items-center justify-between text-xs p-2.5 bg-amber-50 text-amber-800 rounded-xl border border-amber-100">
+                  <div class="flex items-center space-x-2">
+                    <div class="h-4 w-4 rounded-full border-2 border-amber-500 border-t-transparent animate-spin"></div>
+                    <span class="font-medium">Génération des déclarations administratives</span>
+                  </div>
+                  <span class="text-[10px] font-bold bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded">En cours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary absolute decorative card -->
+          <div class="absolute -bottom-6 -left-6 bg-slate-900 text-white rounded-2xl shadow-xl p-4 max-w-[200px] border border-slate-800/80 z-20 hidden sm:block">
+            <div class="flex items-center space-x-2.5 mb-2">
+              <div class="h-7 w-7 rounded-full bg-emerald-500 flex items-center justify-center text-xs font-bold text-white">CI</div>
+              <div>
+                <h5 class="text-xs font-bold">Côte d'Ivoire</h5>
+                <span class="text-[9px] text-slate-400">Impôt IGR Calculé</span>
+              </div>
+            </div>
+            <div class="text-xs text-emerald-400 font-bold flex items-center justify-between">
+              <span>Barème 2026 :</span>
+              <span class="text-white">Conforme</span>
+            </div>
+          </div>
+
+          <!-- Tertiary absolute decorative card (Employee app) -->
+          <div class="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-4 max-w-[220px] border border-slate-200/50 z-20 hidden md:block">
+            <div class="flex items-center space-x-3 mb-2">
+              <div class="h-8 w-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-slate-800">Demande de Congé</h5>
+                <span class="text-[9px] text-slate-400">Par: Moussa Diop</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-100">
+              <span class="text-[10px] text-slate-500">5 jours (Congés Payés)</span>
+              <span class="bg-primary/10 text-primary font-bold text-[9px] px-2 py-0.5 rounded-full">Approuvé</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PARTNERS / SOCIAL PROOF ================= -->
+  <section class="bg-white border-y border-slate-100 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">
+        Ils font confiance à PayOhada pour piloter leur paie
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+        <!-- Logo 1 -->
+        <div class="flex items-center space-x-1.5 grayscale hover:grayscale-0 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+          <span class="font-extrabold text-lg text-slate-700 tracking-tight">AfriTech</span>
+        </div>
+        <!-- Logo 2 -->
+        <div class="flex items-center space-x-1.5 grayscale hover:grayscale-0 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          <span class="font-extrabold text-lg text-slate-700 tracking-tight">SeneCorp</span>
+        </div>
+        <!-- Logo 3 -->
+        <div class="flex items-center space-x-1.5 grayscale hover:grayscale-0 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 16v1" /></svg>
+          <span class="font-extrabold text-lg text-slate-700 tracking-tight">IvoireFin</span>
+        </div>
+        <!-- Logo 4 -->
+        <div class="flex items-center space-x-1.5 grayscale hover:grayscale-0 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.961 0 1.36 1.253.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.77-.557-.372-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
+          <span class="font-extrabold text-lg text-slate-700 tracking-tight">CamerFood</span>
+        </div>
+        <!-- Logo 5 -->
+        <div class="flex items-center space-x-1.5 grayscale hover:grayscale-0 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+          <span class="font-extrabold text-lg text-slate-700 tracking-tight">SahelInnov</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES SECTION (TABS) ================= -->
+  <section id="features" class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-base text-primary font-bold tracking-wide uppercase">Une Suite RH Complète</h2>
+        <p class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Tout pour gérer vos paies et vos employés au même endroit
+        </p>
+        <p class="mt-4 text-lg text-slate-500">
+          Éliminez les fichiers Excel complexes. PayOhada centralise l'ensemble de votre processus administratif dans un outil moderne et sécurisé.
+        </p>
+      </div>
+
+      <!-- Interactive Tabs -->
+      <div class="w-full">
+        <!-- Tab Headers -->
+        <div class="flex flex-wrap md:flex-nowrap justify-center gap-2 md:gap-0 bg-slate-200/50 p-1.5 rounded-2xl max-w-4xl mx-auto mb-12">
+          
+          <button onclick="switchTab(0)" id="tab-btn-0" class="tab-btn w-full md:w-1/4 py-3.5 px-4 text-center font-bold text-sm rounded-xl transition-all duration-300 bg-white text-primary shadow-sm">
+            Calcul de la Paie
+          </button>
+          
+          <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn w-full md:w-1/4 py-3.5 px-4 text-center font-bold text-sm rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900">
+            Congés & Absences
+          </button>
+          
+          <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn w-full md:w-1/4 py-3.5 px-4 text-center font-bold text-sm rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900">
+            Déclarations CNPS
+          </button>
+          
+          <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn w-full md:w-1/4 py-3.5 px-4 text-center font-bold text-sm rounded-xl transition-all duration-300 text-slate-600 hover:text-slate-900">
+            Espace Collaborateur
+          </button>
+
+        </div>
+
+        <!-- Tab Contents -->
+        <div class="max-w-6xl mx-auto bg-white rounded-3xl border border-slate-200/50 shadow-xl overflow-hidden min-h-[400px]">
+          
+          <!-- Tab Content 1: Paie -->
+          <div id="tab-content-0" class="tab-content grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+              <div class="h-12 w-12 bg-primary-100 text-primary rounded-2xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 16v1" /></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Une paie automatisée et toujours à jour</h3>
+              <p class="text-slate-500 leading-relaxed">
+                Configurez une seule fois vos collaborateurs et laissez PayOhada s'occuper du reste. Notre moteur applique instantanément les calculs d'impôts locaux (IGR, ITS, IRPP) et les plafonds CNPS du pays choisi.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Calcul instantané du brut au net.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Prise en compte automatique des heures supplémentaires et primes.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Génération de fichiers d'ordres de virements bancaires.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="lg:col-span-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              <!-- Payroll structure mockup -->
+              <div class="bg-white rounded-xl shadow-md border border-slate-200/50 p-4 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                  <span class="text-sm font-bold text-slate-800">Calcul du Bulletin</span>
+                  <span class="text-xs text-slate-400">Mois : Août 2026</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-slate-500">Salaire de Base</span>
+                    <span class="font-bold text-slate-800">800.000 FCFA</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-slate-500">Primes de Transport</span>
+                    <span class="font-bold text-slate-800">+ 50.000 FCFA</span>
+                  </div>
+                  <div class="flex justify-between text-sm text-rose-600">
+                    <span class="font-medium">Retenue CNPS (Part Salarié)</span>
+                    <span class="font-bold">- 53.550 FCFA</span>
+                  </div>
+                  <div class="flex justify-between text-sm text-rose-600 border-b border-slate-100 pb-2">
+                    <span class="font-medium">Impôt Général sur le Revenu (IGR)</span>
+                    <span class="font-bold">- 48.200 FCFA</span>
+                  </div>
+                  <div class="flex justify-between text-base pt-2 font-extrabold text-slate-900">
+                    <span>Salaire Net à Payer</span>
+                    <span class="text-primary text-lg">748.250 FCFA</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Conges -->
+          <div id="tab-content-1" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+              <div class="h-12 w-12 bg-primary-100 text-primary rounded-2xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Simplifiez le suivi des congés et absences</h3>
+              <p class="text-slate-500 leading-relaxed">
+                Les collaborateurs font leurs demandes de congés ou d'absences directement depuis leur espace personnel. Les managers reçoivent une alerte et valident en un clic. L'impact sur la paie est calculé automatiquement.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Validation simple via tableau de bord ou email.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Calendrier d'équipe partagé en temps réel.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Calculateur automatique des droits de congés cumulés.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="lg:col-span-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              <!-- Calendar View Mockup -->
+              <div class="bg-white rounded-xl shadow-md border border-slate-200/50 p-4 space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm font-bold text-slate-800">Planning de l'équipe</span>
+                  <span class="text-xs text-slate-500 font-semibold">Août 2026</span>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                      <div class="h-8 w-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs">SK</div>
+                      <div>
+                        <h5 class="text-xs font-bold text-slate-800">Sarah Koné</h5>
+                        <span class="text-[9px] text-slate-400">Développement</span>
+                      </div>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-[9px] px-2 py-0.5 rounded-full">12 - 18 Août (Approuvé)</span>
+                  </div>
+                  
+                  <div class="flex items-center justify-between p-2 hover:bg-slate-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                      <div class="h-8 w-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs">OD</div>
+                      <div>
+                        <h5 class="text-xs font-bold text-slate-800">Omar Diallo</h5>
+                        <span class="text-[9px] text-slate-400">Marketing</span>
+                      </div>
+                    </div>
+                    <span class="bg-amber-100 text-amber-800 font-bold text-[9px] px-2 py-0.5 rounded-full">24 - 28 Août (En attente)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 3: CNPS -->
+          <div id="tab-content-2" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+              <div class="h-12 w-12 bg-primary-100 text-primary rounded-2xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Générez vos déclarations sociales en 1 clic</h3>
+              <p class="text-slate-500 leading-relaxed">
+                Fini le casse-tête de la saisie manuelle sur les portails CNPS de Côte d'Ivoire, du Sénégal ou d'autres états OHADA. PayOhada compile automatiquement les données et exporte des fichiers au format correct (DISA, DAS).
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Export DISA/CNPS formaté prêt pour l'intégration.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Calculateur d'Impôt sur le Revenu actualisé selon la loi locale.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Accompagnement d'experts de paie locaux en cas de contrôle.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="lg:col-span-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              <!-- Declarations download mockup -->
+              <div class="bg-white rounded-xl shadow-md border border-slate-200/50 p-4 space-y-4">
+                <span class="text-sm font-bold text-slate-800 block">Fichiers Déclaratifs Disponibles</span>
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:border-primary border border-transparent transition-all">
+                    <div class="flex items-center space-x-3">
+                      <div class="bg-primary-100 text-primary h-8 w-8 rounded-lg flex items-center justify-center font-bold text-xs">XLS</div>
+                      <div>
+                        <h5 class="text-xs font-bold text-slate-800">Export CNPS DISA</h5>
+                        <span class="text-[9px] text-slate-400">Généré le 25 Août 2026</span>
+                      </div>
+                    </div>
+                    <button class="bg-slate-200 hover:bg-primary hover:text-white text-slate-700 rounded-lg px-3 py-1 text-xs font-bold transition-all">Télécharger</button>
+                  </div>
+                  
+                  <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:border-primary border border-transparent transition-all">
+                    <div class="flex items-center space-x-3">
+                      <div class="bg-primary-100 text-primary h-8 w-8 rounded-lg flex items-center justify-center font-bold text-xs">PDF</div>
+                      <div>
+                        <h5 class="text-xs font-bold text-slate-800">Déclaration Fiscalité Mensuelle</h5>
+                        <span class="text-[9px] text-slate-400">ITS / IGR récapitulatif</span>
+                      </div>
+                    </div>
+                    <button class="bg-slate-200 hover:bg-primary hover:text-white text-slate-700 rounded-lg px-3 py-1 text-xs font-bold transition-all">Télécharger</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 4: Portail -->
+          <div id="tab-content-3" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+              <div class="h-12 w-12 bg-primary-100 text-primary rounded-2xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold text-slate-900">Un portail sécurisé pour chaque salarié</h3>
+              <p class="text-slate-500 leading-relaxed">
+                Offrez à vos employés l'autonomie qu'ils méritent. Ils accèdent de manière sécurisée à leur espace personnel depuis leur smartphone ou leur ordinateur pour consulter et télécharger leurs documents de paie.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Téléchargement des bulletins de paie (historique illimité).</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Saisie des demandes de congés avec suivi de validation.</span>
+                </li>
+                <li class="flex items-start space-x-3 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  <span>Mise à jour des coordonnées personnelles et coordonnées bancaires.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="lg:col-span-6 bg-slate-50 p-6 rounded-2xl border border-slate-100 flex justify-center">
+              <!-- Employee Portal Mobile View Mockup -->
+              <div class="bg-white rounded-3xl shadow-lg border border-slate-200/50 w-64 p-4 space-y-4">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="font-bold text-slate-800">Espace Collaborateur</span>
+                  <span class="text-primary font-bold">PayOhada</span>
+                </div>
+                <div class="text-center py-2">
+                  <div class="h-14 w-14 rounded-full bg-primary-100 text-primary flex items-center justify-center font-bold text-lg mx-auto mb-2">AN</div>
+                  <h4 class="text-xs font-bold text-slate-800">Amandine N'Guessan</h4>
+                  <span class="text-[9px] text-slate-400">Responsable Clientèle</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-center text-[10px]">
+                  <div class="bg-slate-50 p-2 rounded-lg">
+                    <span class="text-slate-400 block">Solde Congés</span>
+                    <span class="font-bold text-slate-800">18.5 jours</span>
+                  </div>
+                  <div class="bg-slate-50 p-2 rounded-lg">
+                    <span class="text-slate-400 block">Dernier Net</span>
+                    <span class="font-bold text-slate-800">450K FCFA</span>
+                  </div>
+                </div>
+                <button class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold hover:bg-primary-600 transition-colors shadow">Demander un congé</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SIMULATEUR DE PAIE INTERACTIF ================= -->
+  <section id="simulator" class="py-20 lg:py-28 bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-950 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 right-0 bottom-0 bg-[radial-gradient(#20973d_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left explanation text -->
+        <div class="lg:col-span-5 space-y-6">
+          <h2 class="text-base text-primary font-bold tracking-wide uppercase">Calculateur Gratuit</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            Estimez le coût réel de votre paie en un instant
+          </h3>
+          <p class="text-slate-300">
+            Sélectionnez votre pays d'implantation dans l'espace OHADA, définissez le salaire de base brut de votre collaborateur et découvrez le détail des cotisations salariales, patronales et le salaire net restant.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3.5">
+              <div class="h-6 w-6 rounded-full bg-primary/20 text-primary flex items-center justify-center mt-1 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-slate-300 text-sm">Calculateur basé sur la législation sociale et fiscale OHADA en vigueur en 2026.</p>
+            </div>
+            <div class="flex items-start space-x-3.5">
+              <div class="h-6 w-6 rounded-full bg-primary/20 text-primary flex items-center justify-center mt-1 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <p class="text-slate-300 text-sm">Prise en compte des tranches d'impôt progressives et plafonds CNPS spécifiques par pays.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right interactive component container -->
+        <div class="lg:col-span-7">
+          <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-slate-700 shadow-2xl">
+            
+            <!-- Controls (Country Selector & Salary Input) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              
+              <!-- Country selector -->
+              <div>
+                <label for="sim-country" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Pays d'implantation</label>
+                <select id="sim-country" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3.5 focus:border-primary focus:outline-none transition-colors font-medium">
+                  <option value="ci" selected>Côte d'Ivoire (CNPS, IGR)</option>
+                  <option value="sn">Sénégal (IPRES, CSS, IR)</option>
+                  <option value="cm">Cameroun (CNPS, IRPP)</option>
+                </select>
+              </div>
+
+              <!-- Salary Brut manual input -->
+              <div>
+                <label for="sim-brut-input" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Salaire Brut (FCFA)</label>
+                <div class="relative">
+                  <input type="number" id="sim-brut-input" min="100000" max="3000000" step="50000" value="500000" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl pl-4 pr-16 py-3.5 focus:border-primary focus:outline-none transition-colors font-bold text-lg">
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold text-sm">FCFA</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Salary slider -->
+            <div class="mb-8">
+              <div class="flex justify-between text-xs font-bold text-slate-400 mb-2.5">
+                <span>Ajustement rapide du brut</span>
+                <span id="slider-brut-display" class="text-primary text-sm font-extrabold">500 000 FCFA</span>
+              </div>
+              <input type="range" id="sim-brut-slider" min="100000" max="3000000" step="50000" value="500000" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-500 font-semibold mt-1">
+                <span>100K FCFA</span>
+                <span>1.5M FCFA</span>
+                <span>3.0M FCFA</span>
+              </div>
+            </div>
+
+            <hr class="border-slate-700 my-6">
+
+            <!-- Simulator outputs / metrics -->
+            <div class="space-y-6">
+              
+              <!-- Net salary highlighted -->
+              <div class="bg-slate-900/60 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-between">
+                <div>
+                  <span class="text-xs text-slate-400 font-bold uppercase block mb-1">Estimation Salaire Net</span>
+                  <span class="text-[10px] text-emerald-400 font-medium block">Après cotisations et taxes locales</span>
+                </div>
+                <div class="text-right">
+                  <span id="sim-net-display" class="text-2xl md:text-3xl font-extrabold text-primary">425.500</span>
+                  <span class="text-xs font-bold text-primary ml-1">FCFA</span>
+                </div>
+              </div>
+
+              <!-- Details breakdown progress bar -->
+              <div class="space-y-4">
+                
+                <!-- Salarial Charges -->
+                <div>
+                  <div class="flex justify-between text-xs font-bold mb-1.5">
+                    <span class="text-slate-300">Charges Salarié (CNPS + Impôts)</span>
+                    <span id="sim-salarial-display" class="text-slate-100">74.500 FCFA</span>
+                  </div>
+                  <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="sim-salarial-pct" class="bg-rose-500 h-full rounded-full transition-all duration-300" style="width: 15%"></div>
+                  </div>
+                </div>
+
+                <!-- Employer Charges -->
+                <div>
+                  <div class="flex justify-between text-xs font-bold mb-1.5">
+                    <span class="text-slate-300">Charges Patronales (Employeur)</span>
+                    <span id="sim-employer-display" class="text-slate-100">80.000 FCFA</span>
+                  </div>
+                  <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="sim-employer-pct" class="bg-amber-500 h-full rounded-full transition-all duration-300" style="width: 16%"></div>
+                  </div>
+                </div>
+
+                <!-- Total Employer cost -->
+                <div>
+                  <div class="flex justify-between text-xs font-bold mb-1.5">
+                    <span class="text-slate-300">Coût Total pour l'Employeur</span>
+                    <span id="sim-total-display" class="text-white font-extrabold text-sm">580.000 FCFA</span>
+                  </div>
+                  <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="sim-total-pct" class="bg-primary h-full rounded-full transition-all duration-300" style="width: 100%"></div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Footer simulator disclaimer -->
+            <div class="mt-6 text-[10px] text-slate-500 text-center leading-relaxed">
+              Ce simulateur fournit des estimations basées sur un profil d'employé standard sans avantages spécifiques (indemnités non imposables, primes de rendement exceptionnelles, etc.). Les résultats réels de paie peuvent légèrement différer en fonction de votre convention collective et de l'historique de l'employé.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SIMULATEUR DE TARIFS ================= -->
+  <section id="pricing" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-base text-primary font-bold tracking-wide uppercase">Des Tarifs Transparents</h2>
+        <p class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Un abonnement simple qui s'adapte à votre croissance
+        </p>
+        <p class="mt-4 text-lg text-slate-500">
+          Pas de frais cachés. Vous payez en fonction de votre nombre d'employés actifs à la fin du mois. Ajustez le curseur pour simuler votre coût mensuel.
+        </p>
+      </div>
+
+      <!-- Simulator Slider -->
+      <div class="max-w-xl mx-auto mb-12 bg-slate-50 p-6 rounded-2xl border border-slate-200/60">
+        <div class="flex justify-between items-center mb-6">
+          <span class="text-sm font-bold text-slate-600 uppercase tracking-wider">Nombre d'employés</span>
+          <div class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
+            <span id="price-employee-count" class="text-xl font-extrabold text-slate-900">15</span>
+            <span class="text-xs font-semibold text-slate-400">collaborateurs</span>
+          </div>
+        </div>
+        
+        <input type="range" id="price-slider" min="1" max="150" value="15" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+        <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
+          <span>1 employé</span>
+          <span>75 employés</span>
+          <span>150+ (Contactez-nous)</span>
+        </div>
+      </div>
+
+      <!-- Pricing Plans Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        
+        <!-- Plan Standard -->
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-lg p-8 relative flex flex-col justify-between">
+          <div>
+            <h4 class="text-lg font-bold text-slate-900 mb-2">Offre Standard</h4>
+            <p class="text-sm text-slate-500 mb-6">Idéal pour les entreprises recherchant l'essentiel pour automatiser leur paie.</p>
+            
+            <div class="mb-6">
+              <span id="price-standard-display" class="text-4xl font-extrabold text-slate-900">47.500</span>
+              <span class="text-sm font-bold text-slate-500 ml-1">FCFA / mois</span>
+            </div>
+
+            <hr class="border-slate-100 my-6">
+
+            <ul class="space-y-4">
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Calcul des bulletins automatisé</span>
+              </li>
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Fichiers exports CNPS / Impôts</span>
+              </li>
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Accès portail employé (fiche de paie)</span>
+              </li>
+              <li class="flex items-center space-x-3 text-sm text-slate-400 line-through">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                <span>Module avancé de congés & absences</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button class="w-full py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl transition-colors" onclick="openDemoModal(event, 'pricing-standard')">Choisir l'offre Standard</button>
+          </div>
+        </div>
+
+        <!-- Plan Premium -->
+        <div class="bg-white rounded-3xl border-2 border-primary shadow-2xl p-8 relative flex flex-col justify-between">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full shadow">
+            Recommandé
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-slate-900 mb-2">Offre Premium</h4>
+            <p class="text-sm text-slate-500 mb-6">Idéal pour les entreprises souhaitant digitaliser entièrement la paie et la gestion RH.</p>
+            
+            <div class="mb-6">
+              <span id="price-premium-display" class="text-4xl font-extrabold text-slate-900">82.500</span>
+              <span class="text-sm font-bold text-slate-500 ml-1">FCFA / mois</span>
+            </div>
+
+            <hr class="border-slate-100 my-6">
+
+            <ul class="space-y-4">
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Tout ce qui est inclus dans Standard</span>
+              </li>
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Validation avancée des congés (Workflow RH)</span>
+              </li>
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Signature électronique des contrats de travail</span>
+              </li>
+              <li class="flex items-center space-x-3 text-sm text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <span>Support dédié prioritaire par nos experts paie</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <button class="w-full py-3.5 bg-primary hover:bg-primary-600 text-white font-bold rounded-xl transition-colors shadow-lg shadow-primary/20" onclick="openDemoModal(event, 'pricing-premium')">Choisir l'offre Premium</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="py-20 lg:py-28 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-base text-primary font-bold tracking-wide uppercase">Témoignages Clients</h2>
+        <p class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Adopté par les leaders de la zone OHADA
+        </p>
+      </div>
+
+      <!-- Testimonial Slider Wrapper -->
+      <div class="max-w-4xl mx-auto relative px-4">
+        
+        <!-- Main slider view -->
+        <div class="overflow-hidden bg-white border border-slate-200/50 rounded-3xl shadow-xl p-8 md:p-12 relative min-h-[300px] flex items-center">
+          
+          <!-- Quote Icon -->
+          <span class="absolute top-6 left-6 text-slate-100 font-extrabold text-7xl select-none leading-none">“</span>
+          
+          <div class="relative z-10 w-full">
+            
+            <!-- Slide 0 -->
+            <div id="testimonial-slide-0" class="testimonial-slide transition-opacity duration-500">
+              <p class="text-lg md:text-xl text-slate-600 italic leading-relaxed">
+                "Nous utilisions Excel pour gérer la paie de nos 75 collaborateurs à Abidjan et à Dakar. Les erreurs étaient fréquentes et le calcul des cotisations CNPS prenait des jours entiers. Avec PayOhada, le traitement de la paie prend désormais moins d'une heure par mois, sans aucun stress."
+              </p>
+              <div class="mt-6 flex items-center space-x-3.5">
+                <div class="h-10 w-10 bg-primary-100 text-primary rounded-full flex items-center justify-center font-bold text-sm">MK</div>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-950">Marie-Adeline Kouamé</h4>
+                  <span class="text-xs text-slate-400">Directrice RH, IvoireLogistics</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 1 -->
+            <div id="testimonial-slide-1" class="testimonial-slide hidden transition-opacity duration-500">
+              <p class="text-lg md:text-xl text-slate-600 italic leading-relaxed">
+                "Ce logiciel est une bénédiction pour notre start-up. Il gère parfaitement la spécificité des lois du travail sénégalaises, notamment les calculs d'impôts sur le salaire et les fonds de retraite. Les salariés adorent le fait de pouvoir demander leurs congés sur smartphone."
+              </p>
+              <div class="mt-6 flex items-center space-x-3.5">
+                <div class="h-10 w-10 bg-primary-100 text-primary rounded-full flex items-center justify-center font-bold text-sm">AD</div>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-950">Amadou Diouf</h4>
+                  <span class="text-xs text-slate-400">Fondateur & CEO, SeneCorp</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div id="testimonial-slide-2" class="testimonial-slide hidden transition-opacity duration-500">
+              <p class="text-lg md:text-xl text-slate-600 italic leading-relaxed">
+                "Le support client de PayOhada est tout simplement exceptionnel. En cas de question réglementaire au Cameroun, un expert en gestion de paie nous répond dans l'heure avec une solution concrète. Je recommande sans hésitation."
+              </p>
+              <div class="mt-6 flex items-center space-x-3.5">
+                <div class="h-10 w-10 bg-primary-100 text-primary rounded-full flex items-center justify-center font-bold text-sm">CN</div>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-950">Carine N'Guemo</h4>
+                  <span class="text-xs text-slate-400">Responsable Administrative et Financière, CamerFood</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slider Navigation Controls -->
+        <div class="flex justify-center space-x-3 mt-8">
+          <button onclick="prevTestimonial()" class="bg-white hover:bg-slate-50 text-slate-700 h-10 w-10 rounded-full border border-slate-200 flex items-center justify-center shadow transition-all hover:scale-105" aria-label="Témoignage précédent">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button onclick="nextTestimonial()" class="bg-white hover:bg-slate-50 text-slate-700 h-10 w-10 rounded-full border border-slate-200 flex items-center justify-center shadow transition-all hover:scale-105" aria-label="Témoignage suivant">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ SECTION ================= -->
+  <section id="faq" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-base text-primary font-bold tracking-wide uppercase">Questions Fréquentes</h2>
+        <p class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Vous avez des questions ? Nous y répondons.
+        </p>
+      </div>
+
+      <!-- FAQ Accordions -->
+      <div class="space-y-4">
+        
+        <!-- FAQ item 1 -->
+        <div class="border border-slate-200/80 rounded-2xl overflow-hidden transition-all bg-slate-50">
+          <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+            <span class="font-bold text-slate-900">Comment se déroule la migration depuis notre système actuel (Excel ou autre logiciel) ?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-white">
+            <div class="px-6 py-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              La migration est extrêmement simple. Nos équipes paie prennent en charge l'intégration de votre historique et des données de vos collaborateurs. Vous nous fournissez vos anciennes fiches de paie ou un fichier Excel de base, et nous paramétrons tout sur PayOhada en moins de 48 heures.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ item 2 -->
+        <div class="border border-slate-200/80 rounded-2xl overflow-hidden transition-all bg-slate-50">
+          <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+            <span class="font-bold text-slate-900">PayOhada gère-t-il les réglementations fiscales de plusieurs pays ?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-white">
+            <div class="px-6 py-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Oui, tout à fait. PayOhada est conçu spécifiquement pour la zone OHADA. Nous intégrons les spécificités des caisses d'assurances sociales (CNPS, IPRES) et des barèmes d'impôt sur le revenu dans plus de 10 pays, incluant la Côte d'Ivoire, le Sénégal, le Cameroun, le Gabon, et le Mali.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ item 3 -->
+        <div class="border border-slate-200/80 rounded-2xl overflow-hidden transition-all bg-slate-50">
+          <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+            <span class="font-bold text-slate-900">Les taux et les lois fiscales sont-ils mis à jour automatiquement ?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-white">
+            <div class="px-6 py-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              Absolument. En tant que plateforme SaaS en ligne, toutes les réformes légales, modifications de taux de cotisations CNPS ou changements de tranches d'impôt sur le revenu sont automatiquement mis en œuvre dans l'application par nos experts juridiques sans aucune action requise de votre part.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ item 4 -->
+        <div class="border border-slate-200/80 rounded-2xl overflow-hidden transition-all bg-slate-50">
+          <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+            <span class="font-bold text-slate-900">Où nos données de paie et de collaborateurs sont-elles stockées ?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-white">
+            <div class="px-6 py-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+              La sécurité est notre priorité absolue. Les données de vos collaborateurs sont chiffrées de bout en bout et hébergées sur des serveurs hautement sécurisés conformes aux normes internationales les plus exigeantes (ISO 27001). Des sauvegardes sont effectuées quotidiennement.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA BANNER ================= -->
+  <section class="py-16 lg:py-24 bg-gradient-to-br from-primary to-emerald-600 text-white relative overflow-hidden">
+    <!-- Decorative patterns -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-white filter blur-2xl"></div>
+    </div>
+    
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+        Prêt à moderniser votre gestion RH ?
+      </h2>
+      <p class="text-lg text-primary-50 max-w-xl mx-auto">
+        Rejoignez les entreprises de la zone OHADA qui ont choisi d'éliminer la paperasse et les erreurs de paie définitivement.
+      </p>
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#" class="shimmer-btn bg-white hover:bg-slate-50 text-primary font-bold px-8 py-4 rounded-2xl shadow-xl transition-all w-full sm:w-auto text-center" onclick="openDemoModal(event, 'final-cta-primary')">
+          Planifier une Démo Gratuite
+        </a>
+        <a href="#" class="bg-primary-700/40 hover:bg-primary-700/60 border border-primary-300 text-white font-semibold px-8 py-4 rounded-2xl transition-colors w-full sm:w-auto text-center" onclick="openDemoModal(event, 'final-cta-secondary')">
+          Essai 14 Jours
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+      
+      <!-- Company column / Logo -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="#" class="flex items-center space-x-2">
+          <div class="h-8 w-8 bg-primary rounded-lg flex items-center justify-center text-white font-extrabold text-sm">
+            P
+          </div>
+          <span class="text-lg font-bold tracking-tight text-white">Pay<span class="text-primary">Ohada</span></span>
+        </a>
+        <p class="text-xs text-slate-500 max-w-sm leading-relaxed">
+          PayOhada propose le premier logiciel moderne tout-en-un pour la paie et la gestion des ressources humaines adapté spécifiquement au cadre réglementaire du droit des affaires OHADA.
+        </p>
+        <div class="pt-2 flex items-center space-x-3 text-xs">
+          <!-- Localized Country Selector Indicator -->
+          <span class="flex h-2.5 w-2.5 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span class="text-slate-500 font-medium">Bureaux : Abidjan, Dakar, Douala</span>
+        </div>
+      </div>
+
+      <!-- Links Column 1: Produit -->
+      <div>
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Produit</h4>
+        <ul class="space-y-2.5 text-xs">
+          <li><a href="#features" class="hover:text-primary transition-colors">Calcul de la paie</a></li>
+          <li><a href="#features" class="hover:text-primary transition-colors">Congés & absences</a></li>
+          <li><a href="#features" class="hover:text-primary transition-colors">Déclarations administratives</a></li>
+          <li><a href="#features" class="hover:text-primary transition-colors">Portail des salariés</a></li>
+        </ul>
+      </div>
+
+      <!-- Links Column 2: Ressources -->
+      <div>
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Ressources</h4>
+        <ul class="space-y-2.5 text-xs">
+          <li><a href="#" class="hover:text-primary transition-colors" onclick="openDemoModal(event, 'footer-blog')">Le Blog RH</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors" onclick="openDemoModal(event, 'footer-help')">Centre d'aide</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors" onclick="openDemoModal(event, 'footer-laws')">Guide légal OHADA</a></li>
+        </ul>
+      </div>
+
+      <!-- Links Column 3: Contact & Legal -->
+      <div>
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Légal & Contact</h4>
+        <ul class="space-y-2.5 text-xs">
+          <li><a href="#" class="hover:text-primary transition-colors" onclick="openDemoModal(event, 'footer-legal')">Mentions légales</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors" onclick="openDemoModal(event, 'footer-confidentiality')">Confidentialité</a></li>
+          <li><a href="mailto:contact@payohada.com" class="hover:text-primary transition-colors">contact@payohada.com</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom copyright bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-900 text-center text-[10px] text-slate-600 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div>
+        © 2026 PayOhada. Tous droits réservés.
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-slate-500">Implantation locale :</span>
+        <span class="bg-slate-900 border border-slate-800 text-slate-400 px-2 py-0.5 rounded text-[9px] font-bold">UEMOA</span>
+        <span class="bg-slate-900 border border-slate-800 text-slate-400 px-2 py-0.5 rounded text-[9px] font-bold">CEMAC</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= INTERACTIVE DEMO MODAL ================= -->
+  <div id="demo-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    
+    <!-- Backdrop overlay -->
+    <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity" onclick="closeDemoModal()"></div>
+    
+    <!-- Modal Center Wrapper -->
+    <div class="flex min-h-screen items-center justify-center p-4 text-center">
+      
+      <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-slate-100 flex flex-col">
+        
+        <!-- Close button -->
+        <button onclick="closeDemoModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 focus:outline-none" aria-label="Fermer la modale">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+
+        <!-- Initial Form Panel -->
+        <div id="modal-form-panel" class="p-8 space-y-6">
+          <div class="text-center">
+            <h3 class="text-2xl font-extrabold text-slate-900" id="modal-title">Découvrez PayOhada</h3>
+            <p class="text-xs text-slate-400 mt-2">Remplissez le formulaire ci-dessous et nos experts paie vous contacteront sous 24h.</p>
+          </div>
+
+          <form id="demo-request-form" class="space-y-4" onsubmit="submitDemoForm(event)">
+            <input type="hidden" id="form-source" name="source" value="general">
+            
+            <!-- Full Name input -->
+            <div>
+              <label for="form-name" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Nom Complet</label>
+              <input type="text" id="form-name" required placeholder="Ex: Koffi N'Guessan" class="w-full bg-slate-50 border border-slate-200 text-slate-950 rounded-xl px-4 py-3 focus:border-primary focus:bg-white focus:outline-none transition-colors text-sm font-medium">
+            </div>
+
+            <!-- Email Address input -->
+            <div>
+              <label for="form-email" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Adresse Email Professionnelle</label>
+              <input type="email" id="form-email" required placeholder="Ex: k.nguessan@entreprise.com" class="w-full bg-slate-50 border border-slate-200 text-slate-950 rounded-xl px-4 py-3 focus:border-primary focus:bg-white focus:outline-none transition-colors text-sm font-medium">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Company Name input -->
+              <div>
+                <label for="form-company" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Entreprise</label>
+                <input type="text" id="form-company" required placeholder="Nom de l'entreprise" class="w-full bg-slate-50 border border-slate-200 text-slate-950 rounded-xl px-4 py-3 focus:border-primary focus:bg-white focus:outline-none transition-colors text-sm font-medium">
+              </div>
+              
+              <!-- Number of Employees selector -->
+              <div>
+                <label for="form-employees" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Taille</label>
+                <select id="form-employees" required class="w-full bg-slate-50 border border-slate-200 text-slate-950 rounded-xl px-4 py-3.5 focus:border-primary focus:bg-white focus:outline-none transition-colors text-sm font-medium">
+                  <option value="" disabled selected>Collaborateurs</option>
+                  <option value="1-9">1-9 employés</option>
+                  <option value="10-49">10-49 employés</option>
+                  <option value="50-199">50-199 employés</option>
+                  <option value="200+">Plus de 200</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Country selection -->
+            <div>
+              <label for="form-country" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Pays</label>
+              <select id="form-country" required class="w-full bg-slate-50 border border-slate-200 text-slate-950 rounded-xl px-4 py-3.5 focus:border-primary focus:bg-white focus:outline-none transition-colors text-sm font-medium">
+                <option value="" disabled selected>Sélectionnez un pays</option>
+                <option value="CI">Côte d'Ivoire</option>
+                <option value="SN">Sénégal</option>
+                <option value="CM">Cameroun</option>
+                <option value="GA">Gabon</option>
+                <option value="ML">Mali</option>
+                <option value="Autre">Autre pays zone OHADA</option>
+              </select>
+            </div>
+
+            <!-- CTA button submit -->
+            <button type="submit" class="w-full bg-primary hover:bg-primary-600 text-white font-bold py-4 rounded-xl shadow-lg transition-colors mt-2 text-sm uppercase tracking-wider">
+              Recevoir mes accès de démonstration
+            </button>
+          </form>
+        </div>
+
+        <!-- Success Message Panel (Hidden initially) -->
+        <div id="modal-success-panel" class="p-8 space-y-6 hidden text-center">
+          <div class="h-16 w-16 bg-primary-100 text-primary rounded-full flex items-center justify-center mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          
+          <div class="space-y-2">
+            <h3 class="text-2xl font-extrabold text-slate-900">Demande Enregistrée !</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">
+              Merci, <span id="success-user-name" class="font-bold text-slate-800">Collaborateur</span>. Votre demande de démo a bien été prise en compte. Un expert en gestion de paie locale de PayOhada prendra contact avec vous d'ici 24 heures pour configurer votre accès personnalisé.
+            </p>
+          </div>
+
+          <button onclick="closeDemoModal()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
+            Fermer
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= CORE WEB JAVASCRIPT ================= -->
+  <script>
+    // ----------------------------------------
+    // Mobile Menu Toggle
+    // ----------------------------------------
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconHamburger = document.getElementById('menu-icon-hamburger');
+    const menuIconClose = document.getElementById('menu-icon-close');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuIconHamburger.classList.toggle('hidden');
+      menuIconClose.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on clicking links
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIconHamburger.classList.remove('hidden');
+        menuIconClose.classList.add('hidden');
+      });
+    });
+
+    // ----------------------------------------
+    // Sticky Navbar Styling on Scroll
+    // ----------------------------------------
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 40) {
+        nav.classList.add('py-2', 'shadow-md');
+        nav.classList.remove('py-0');
+      } else {
+        nav.classList.remove('py-2', 'shadow-md');
+      }
+    });
+
+    // ----------------------------------------
+    // Feature Tabs Interactivity
+    // ----------------------------------------
+    function switchTab(tabIndex) {
+      // Hide all contents
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.add('hidden'));
+
+      // Show targeted content
+      document.getElementById(`tab-content-${tabIndex}`).classList.remove('hidden');
+
+      // Update button classes
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+        btn.classList.add('text-slate-600', 'hover:text-slate-900');
+      });
+
+      // Highlight selected button
+      const targetBtn = document.getElementById(`tab-btn-${tabIndex}`);
+      targetBtn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+      targetBtn.classList.remove('text-slate-600', 'hover:text-slate-900');
+    }
+
+    // ----------------------------------------
+    // Interactive Payroll Simulator
+    // ----------------------------------------
+    const simCountry = document.getElementById('sim-country');
+    const simBrutInput = document.getElementById('sim-brut-input');
+    const simBrutSlider = document.getElementById('sim-brut-slider');
+    
+    const sliderBrutDisplay = document.getElementById('slider-brut-display');
+    const simNetDisplay = document.getElementById('sim-net-display');
+    const simSalarialDisplay = document.getElementById('sim-salarial-display');
+    const simEmployerDisplay = document.getElementById('sim-employer-display');
+    const simTotalDisplay = document.getElementById('sim-total-display');
+
+    const simSalarialPct = document.getElementById('sim-salarial-pct');
+    const simEmployerPct = document.getElementById('sim-employer-pct');
+    const simTotalPct = document.getElementById('sim-total-pct');
+
+    // Helper to format currency
+    function formatMoney(amount) {
+      return new Intl.NumberFormat('fr-FR').format(Math.round(amount));
+    }
+
+    // Run payroll simulation calculations
+    function calculateSimulation() {
+      const brut = parseFloat(simBrutInput.value) || 0;
+      const country = simCountry.value;
+      
+      let salarialRate = 0.15; // default rate
+      let employerRate = 0.16; // default rate
+      
+      if (country === 'ci') {
+        // Cote d'Ivoire
+        salarialRate = 0.13; // CNPS + local estimate tax
+        employerRate = 0.15; // CNPS parts patronales
+      } else if (country === 'sn') {
+        // Senegal
+        salarialRate = 0.145;
+        employerRate = 0.18;
+      } else if (country === 'cm') {
+        // Cameroun
+        salarialRate = 0.12;
+        employerRate = 0.165;
+      }
+
+      // Calculations
+      const salarialCharges = brut * salarialRate;
+      const netPay = brut - salarialCharges;
+      const employerCharges = brut * employerRate;
+      const totalCost = brut + employerCharges;
+
+      // Update UI displays
+      sliderBrutDisplay.textContent = `${formatMoney(brut)} FCFA`;
+      simNetDisplay.textContent = formatMoney(netPay);
+      simSalarialDisplay.textContent = `${formatMoney(salarialCharges)} FCFA`;
+      simEmployerDisplay.textContent = `${formatMoney(employerCharges)} FCFA`;
+      simTotalDisplay.textContent = `${formatMoney(totalCost)} FCFA`;
+
+      // Percentages bar widths
+      const salPctVal = (salarialCharges / totalCost) * 100;
+      const empPctVal = (employerCharges / totalCost) * 100;
+      
+      simSalarialPct.style.width = `${salPctVal}%`;
+      simEmployerPct.style.width = `${empPctVal}%`;
+      simTotalPct.style.width = `100%`;
+    }
+
+    // Sync input number and slider range inputs
+    simBrutInput.addEventListener('input', () => {
+      let val = parseFloat(simBrutInput.value) || 0;
+      if (val > 3000000) val = 3000000;
+      simBrutSlider.value = val;
+      calculateSimulation();
+    });
+
+    simBrutSlider.addEventListener('input', () => {
+      simBrutInput.value = simBrutSlider.value;
+      calculateSimulation();
+    });
+
+    simCountry.addEventListener('change', calculateSimulation);
+
+    // Initial simulation trigger
+    calculateSimulation();
+
+    // ----------------------------------------
+    // Dynamic Pricing Simulator
+    // ----------------------------------------
+    const priceSlider = document.getElementById('price-slider');
+    const priceEmployeeCount = document.getElementById('price-employee-count');
+    const priceStandardDisplay = document.getElementById('price-standard-display');
+    const pricePremiumDisplay = document.getElementById('price-premium-display');
+
+    function calculatePricing() {
+      const count = parseInt(priceSlider.value) || 1;
+      
+      // Standard Formula: 25 000 flat + 1 500 per head
+      const standardCost = 25000 + (count * 1500);
+      
+      // Premium Formula: 45 000 flat + 2 500 per head
+      const premiumCost = 45000 + (count * 2500);
+
+      // Render
+      priceEmployeeCount.textContent = count;
+      priceStandardDisplay.textContent = formatMoney(standardCost);
+      pricePremiumDisplay.textContent = formatMoney(premiumCost);
+    }
+
+    priceSlider.addEventListener('input', calculatePricing);
+    calculatePricing(); // Run initially
+
+    // ----------------------------------------
+    // Testimonials Carousel
+    // ----------------------------------------
+    let currentTestimonialIndex = 0;
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+
+    function showTestimonial(index) {
+      testimonialSlides.forEach(slide => {
+        slide.classList.add('hidden');
+        slide.style.opacity = 0;
+      });
+
+      const nextSlide = document.getElementById(`testimonial-slide-${index}`);
+      nextSlide.classList.remove('hidden');
+      setTimeout(() => {
+        nextSlide.style.opacity = 1;
+      }, 50);
+      
+      currentTestimonialIndex = index;
+    }
+
+    function nextTestimonial() {
+      let index = currentTestimonialIndex + 1;
+      if (index >= testimonialSlides.length) {
+        index = 0;
+      }
+      showTestimonial(index);
+    }
+
+    function prevTestimonial() {
+      let index = currentTestimonialIndex - 1;
+      if (index < 0) {
+        index = testimonialSlides.length - 1;
+      }
+      showTestimonial(index);
+    }
+
+    // Auto rotate testimonials every 8 seconds
+    let testimonialInterval = setInterval(nextTestimonial, 8000);
+
+    // Stop auto-rotating on user navigation
+    function resetTestimonialTimer() {
+      clearInterval(testimonialInterval);
+      testimonialInterval = setInterval(nextTestimonial, 8000);
+    }
+
+    document.querySelectorAll('[onclick*="Testimonial"]').forEach(btn => {
+      btn.addEventListener('click', resetTestimonialTimer);
+    });
+
+    // ----------------------------------------
+    // FAQ Accordion Interactivity
+    // ----------------------------------------
+    function toggleFaq(buttonElement) {
+      const container = buttonElement.parentElement;
+      const content = container.querySelector('.overflow-hidden');
+      const arrowIcon = buttonElement.querySelector('svg');
+      
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        // Collapse
+        content.style.maxHeight = '0px';
+        arrowIcon.classList.remove('rotate-180');
+      } else {
+        // Expand (collapsing others first is optional but cleaner)
+        const allContents = document.querySelectorAll('#faq .overflow-hidden');
+        const allArrows = document.querySelectorAll('#faq button svg');
+        allContents.forEach(c => c.style.maxHeight = '0px');
+        allArrows.forEach(a => a.classList.remove('rotate-180'));
+
+        // Measure height of inner div to animate fluidly
+        const innerContent = content.firstElementChild;
+        content.style.maxHeight = `${innerContent.scrollHeight + 10}px`;
+        arrowIcon.classList.add('rotate-180');
+      }
+    }
+
+    // ----------------------------------------
+    // Demo Request Modal Controls
+    // ----------------------------------------
+    const demoModal = document.getElementById('demo-modal');
+    const modalFormPanel = document.getElementById('modal-form-panel');
+    const modalSuccessPanel = document.getElementById('modal-success-panel');
+    const successUserName = document.getElementById('success-user-name');
+    const formSourceInput = document.getElementById('form-source');
+
+    function openDemoModal(event, source) {
+      event.preventDefault();
+      
+      // Update form source trace
+      if (source) {
+        formSourceInput.value = source;
+      }
+
+      // Reset modal view states
+      modalFormPanel.classList.remove('hidden');
+      modalSuccessPanel.classList.add('hidden');
+      document.getElementById('demo-request-form').reset();
+
+      // Show modal
+      demoModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Lock page scroll
+    }
+
+    function closeDemoModal() {
+      demoModal.classList.add('hidden');
+      document.body.style.overflow = ''; // Unlock page scroll
+    }
+
+    function submitDemoForm(event) {
+      event.preventDefault();
+      
+      const nameInput = document.getElementById('form-name').value;
+      
+      // Show user name in success message
+      successUserName.textContent = nameInput;
+
+      // Animate transition to success panel
+      modalFormPanel.classList.add('hidden');
+      modalSuccessPanel.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

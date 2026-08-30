@@ -1,0 +1,14 @@
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#172033}h1,h2,h3{margin-top:0}a{text-decoration:none;color:inherit}.c{width:min(1120px,calc(100% - 32px));margin:auto}.s{padding:72px 0}header{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;z-index:5}.nav{height:70px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;font-size:22px;color:#0B1F3A}.logo b,.green{color:#10B981}.btn{display:inline-block;padding:13px 18px;border-radius:10px;font-weight:700}.primary{background:#10B981;color:#fff}.secondary{border:1px solid #dfe4ea}.hero{background:linear-gradient(180deg,#fff,#f5faf8)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}h1{font-size:clamp(42px,6vw,70px);line-height:1}h2{font-size:clamp(30px,4vw,46px)}p{color:#667085;line-height:1.65}.card,.calc,form{border:1px solid #e3e8ef;border-radius:20px;padding:22px;background:#fff}.flag{font-size:46px}.features,.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature,.price{border:1px solid #e3e8ef;border-radius:17px;padding:20px}.alt{background:#f6f8fb}.prices{grid-template-columns:repeat(4,1fr)}.amount{font-size:25px;font-weight:900;color:#0B1F3A;margin:15px 0 6px}.bullet{background:#f4f7fa;padding:9px;border-radius:8px;font-size:13px;margin:12px 0}.calc label,form label{display:grid;gap:6px;font-size:12px;font-weight:700;margin-bottom:12px}input,select{padding:12px;border:1px solid #d8dee7;border-radius:9px;width:100%}.result div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e5e7eb}.total{font-size:28px;color:#10B981}.dark{background:#0B1F3A;color:#fff}.dark p{color:#c7d2df}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.faq details{padding:15px;border:1px solid #e3e8ef;border-radius:12px;margin:9px 0}.faq summary{font-weight:700}footer{background:#07162a;color:#9bacbf;padding:28px 0;font-size:12px}@media(max-width:850px){.grid{grid-template-columns:1fr}.features,.prices{grid-template-columns:1fr 1fr}}@media(max-width:560px){.features,.prices,.formgrid{grid-template-columns:1fr}.s{padding:55px 0}}
+
+.navlinks{display:flex;gap:22px;align-items:center;font-size:13px;font-weight:700}
+.navlinks a:not(.btn):hover{color:#10B981}
+.landing-country-nav .feature{transition:.2s}
+.landing-country-nav .feature:hover{transform:translateY(-2px);border-color:#10B981}
+
+
+/* PAYOHADA official logo integration */
+.logo-image-link{display:flex;align-items:center}
+.landing-logo-img{display:block;width:205px;max-width:35vw;height:auto;object-fit:contain}
+.country-card{position:relative}
+.landing-payohada-icon{position:absolute;right:20px;top:20px;width:54px;height:54px;object-fit:contain}
+@media(max-width:600px){.landing-logo-img{width:155px;max-width:55vw}.landing-payohada-icon{width:44px;height:44px}}
